@@ -1,0 +1,30 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+@{
+         var content = (ContentModels.AboutOurTeam)Model.Content;
+		 var AboutOurTeamImage = content.Value<MediaWithCrops>("aboutOurTeamImage");
+}
+
+
+ <div class="team__member">
+     <span class="member-designation">@content.Value("aboutOurTeamPostion")</span>
+     <a href="team-details.html">
+         <div class="member-name">
+             <span class="first-name">@content.Value("aboutOurTeamName")</span>
+             <div class="member-image">
+                <img src="@AboutOurTeamImage?.MediaUrl()" alt="@AboutOurTeamImage?.Name">
+            </div>
+             @*<span class="last-name">Ferrer</span>*@
+         </div>
+     </a>
+     <div class="member-details-btn btn_wrapper">
+         <a class="c-button btn-moving" href="team-details.html">
+             <span class="c-button__border"></span>
+             <span class="c-button__text">Details</span>
+         </a>
+     </div>
+ </div>
+                       

@@ -1,0 +1,124 @@
+﻿@using MasterQuality.Models;
+@using Microsoft.AspNetCore.Mvc.ModelBinding;
+@using Umbraco.Cms.Web.Common;
+@using Umbraco.Extensions
+@using MasterQuality
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Web.Common.Views
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@using MasterQuality.Controllers
+@using Umbraco.Cms.Core.Models
+@model MasterQuality.Models.ContactFormViewModel
+
+@inject UmbracoHelper umbracoHelper
+
+@{
+    var successMessage = ViewBag.SuccessMessage as string;
+    var modelState = TempData["ModelState"] as ModelStateDictionary;
+    var contactFormModel = TempData["ContactFormModel"] as ContactFormViewModel;
+}
+
+<div class="contact-form">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            Please fix the errors below.
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    else
+    {
+
+
+        @using (Html.BeginUmbracoForm<ContactFormController>(nameof(ContactFormController.SubmitAsync), null, new { @class = "was-validated" }))
+        {
+
+            @if (modelState != null && contactFormModel != null)
+            {
+                <div class="alert alert-success contact-success-message"
+                     role="alert">
+                    Thank You! Your message has been sent.
+                </div>
+            }
+
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="contact-input">
+                            <input asp-for="Name"
+                                   placeholder="Full Name *" aria-label="Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="contact-input">
+                            <input asp-for="Email"
+                                   pattern="[A-Za-z0-9._%+-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                                   placeholder="Your Email *"
+                                   type="email" aria-label="Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="contact-input">
+                            <input asp-for="PhoneNumber"
+                                   pattern="^(\+?\d{10,15}|0\d{10})$"
+                                   placeholder="Your Phone *"
+                                   type="tel" />
+
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="contact-input">
+                            <input asp-for="Subject"
+                                   placeholder="Subject *" />
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="contact-input">
+                     <textarea asp-for="Message"
+                      rows="5"
+                      placeholder="How can we Help you ?"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="postbox__comment-check mb-40">
+                            <input class="e-check-input is-black" type="checkbox" id="c-check">
+                            <label class="e-check-label" for="c-check">
+                                I agree that my submitted
+                                data is being collected and stored. *
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-xxl-12">
+                        <div class="contact-btn">
+                            <button type="submit" class="input-btn">
+                                <span class="btn-text">
+                                    Post
+                                    Comment
+                                </span><span class="btn-icon">
+                                    <i class="flaticon-next"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+        }
+    }
+</div>

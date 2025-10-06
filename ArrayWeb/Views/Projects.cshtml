@@ -1,0 +1,273 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+}
+
+
+ <!-- page title area start -->
+                <section class="page-title-area section-spacing p-relative adjust-header-space">
+                    <div class="page-title-shapes">
+                    <img class="shape-2" src="~/assets/img/shapes/circle-line-2.jpg" alt="image not found">
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-10">
+                                <div class="page-title-wrappper">
+                                    <div class="breadcrumb-menu mb-25">
+                                        <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                                            <ul class="trail-items">
+                                            <li class="trail-item trail-begin"><span>@Model.Name</span></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                <h2 class="page-title mb-35 animation__word_come_long">@Model.Value("projectsHeaderTitle")</h2>
+                                <p class="page-title-paragraph xlarge p-text">@Model.Value("projectsHeaderDesc")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- page title area end -->
+
+
+  <!-- counter area start  -->
+                <div class="counter-area p-relative fix pt-90 pb-90">
+                    <div class="counter-area__bg_dark area-absolute"></div>
+                    <div class="container">
+                        <div class="counter__inner p-relative">
+                            <div class="counter-wrapper">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="counter-item">
+                                            <h4 class="counter__number">
+                                            <span><span class="odometer" data-count="@Model.Value("projectsBannerNo1")">0</span>+</span>
+                                            </h4>
+                                            <div class="counter__text">
+                                            <p>@Model.Value("projectsBannerName1")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="counter-item">
+                                            <h4 class="counter__number">
+                                            <span><span class="odometer" data-count="@Model.Value("projectsBannerNo2")">0</span>+</span>
+                                            </h4>
+                                            <div class="counter__text">
+                                            <p>@Model.Value("projectsBannerName2")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="counter-area__btn">
+                                            <a href="~/assets/video/team-session.mp4" class="circle-btn popup-video ">
+                                                <span class="icon-box">
+                                                    <svg width="24" height="26" viewBox="0 0 24 26" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M23.1646 13L0.66455 25.9904L0.664551 0.00961778L23.1646 13Z"
+                                                            fill="white"></path>
+                                                    </svg>
+                                                </span>
+                                                <img src="~/assets/img/icons/fact-btn-text.png" alt="image not found"
+                                                    class="image-text">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-6">
+                                        <div class="counter-item">
+                                            <h4 class="counter__number">
+                                            <span><span class="odometer" data-count="@Model.Value("projectsBannerNo3")">0</span>+</span>
+                                            </h4>
+                                            <div class="counter__text">
+                                            <p>@Model.Value("projectsBannerName3")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- counter area end  -->
+
+
+
+				  <!-- project area start -->
+                <section class="project-area-2 p-relative fix section-spacing">
+                    <div class="noise-wrapper">
+                        <div class="noise"></div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="section__title-3-wrapper text-center">
+                            <h2 class="project__sub-title">@Model.Value("projectsMainTitle") <span>05</span></h2>
+                            <h2 class="project__text">@Model.Value("projectsMainBgWord")</h2>
+                            </div>
+                            <div class="project__list-1">
+
+                            @{
+                                var selection = Umbraco.Content(Guid.Parse("478df49b-100a-4f39-8538-a1b111b81604"))
+                                .ChildrenOfType("projectDetalis")
+                                .Where(x => x.IsVisible())
+                                .OrderBy(x => x.CreateDate);
+                            }
+                            
+                                @foreach (var item in selection)
+                                {
+                                        var ProjectImage = item.Value<MediaWithCrops>("projectImage");
+
+                                        <div class="project__item">
+                                                <div class="project-box-3 mb-70">
+                                                    <div class="project-box-3-thumb">
+                                                <a href="@item.Url()">
+                                                    <img src="@ProjectImage?.MediaUrl()"
+                                                alt="@ProjectImage?.Name"></a>
+                                                    </div>
+                                                    <div class="project-box-3-content">
+                                                        <a href="@item.Url()" class="tag">@item.Value("projectCategory")</a>
+                                                        <h3 class="project-box-3-title"><a href="@item.Url()">@item.Value("projectName")</a></h3>
+                                                    </div>
+                                                </div>
+                                            </div>                                   
+
+                                    
+                                }
+                           
+
+
+                                
+                             
+
+                            </div>
+                        </div>
+                       @*  <div class="row row_bottom">
+                            <div class="col-xxl-12">
+                                <div class="area-btn tpl__item-center btn_wrapper mt-150">
+                                    <a class="c-button btn-moving" href="case-study-01.html">
+                                        <span class="c-button__border"></span>
+                                        <span class="c-button__text">View All Projects</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> *@
+                    </div>
+                </section>
+                <!-- project area end -->
+
+				                <!-- link scroll area start  -->
+                <section class="link-scroll-area p-relative fix section-spacing-top pb-40">
+                    <div class="swiper text__scroll">
+                        <div class="swiper-wrapper link-scroll-wrapper">
+                            <div class="swiper-slide">
+                                <div class="link-scroll-line">
+                                    <h2 class="link-scroll-line__heading xlarge uppercase">
+
+
+                                        @{
+                                            if (Model.Value<string[]>("projectsLeftBanner").Length > 0)
+                                            {
+                                                    @foreach (var item in Model.Value<string[]>("projectsLeftBanner"))
+                                                    {
+                                                        <a href="services-details.html">@item</a>
+                                                        <span class="link-separate-icon">
+                                                            <svg width="500" height="500" viewBox="0 0 500 500" fill="none"
+                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                      d="M100.999 250L0 190.598L74.4421 59.402L175.5 118.701L175.557 0H324.443L324.5 118.701L425.557 59.402L500 190.598L399 250L500 309.402L425.557 440.598L324.5 381.299L324.443 500H175.557L175.5 381.299L74.4421 440.598L0 309.402L100.999 250Z"
+                                                                      fill="#14CF93" />
+                                                            </svg>
+                                                        </span>
+
+                                                    }
+                                                
+                                            }
+                                        }
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+                <div class="hr1"></div>
+
+                <section class="link-scroll-area p-relative fix pt-40 section-spacing-bottom">
+                    <div class="swiper text__scroll" dir="rtl">
+                        <div class="swiper-wrapper link-scroll-wrapper">
+                            <div class="swiper-slide">
+                                <div class="link-scroll-line">
+                                    <h2 class="link-scroll-line__heading xlarge uppercase">
+                                        @{
+                                            if (Model.Value<string[]>("projectsRightBanner").Length > 0)
+                                            {
+                                                @foreach (var item in Model.Value<string[]>("projectsRightBanner"))
+                                                {
+                                                    <a href="services-details.html">@item</a>
+                                                    <span class="link-separate-icon">
+                                                        <svg width="500" height="500" viewBox="0 0 500 500" fill="none"
+                                                             xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M100.999 250L0 190.598L74.4421 59.402L175.5 118.701L175.557 0H324.443L324.5 118.701L425.557 59.402L500 190.598L399 250L500 309.402L425.557 440.598L324.5 381.299L324.443 500H175.557L175.5 381.299L74.4421 440.598L0 309.402L100.999 250Z"
+                                                                  fill="#14CF93" />
+                                                        </svg>
+                                                    </span>
+
+                                                }
+
+                                            }
+                                        }
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- link scroll area end  -->
+
+
+				  <!-- discuss area start  -->
+                <section class="discuss-area section-spacing p-relative">
+                    <div class="discuss-area__bg area-absolute" data-background="~/assets/img/gallery/gallery-8.jpg">
+                        <div class="noise-wrapper">
+                            <div class="noise"></div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="discuss__content-wrapper">
+                            <div class="row align-items-center g-5">
+                                <div class="col-lg-9">
+                                    <div class="section__title-3-wrapper section__title-wrapper-discuss">
+                                        <div class="section__subtitle-3">
+                                            <p class="section__subtitle-text">
+                                                any project in mind?
+                                            </p>
+                                            <div class="section__subtitle-number">
+                                                <span>09</span>
+                                            </div>
+                                        </div>
+                                        <h2 class="section__title-main xlarge uppercase folks-text">LET’S
+                                            DISCUSS</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="area-btn d-flex justify-content-lg-end">
+                                        <a href="contact.html" class="circle-btn discuss__btn">
+                                            <span class="icon-box" data-background="~/assets/img/gallery/gallery-8.jpg">
+                                                <i class="flaticon-paper-plane"></i>
+                                            </span>
+                            <img src="~/assets/img/icons/send-message-text.png" alt="image not found"
+                                                class="image-text">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- discuss area end  -->
+

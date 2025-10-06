@@ -1,0 +1,26 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+@{
+         var content = (ContentModels.AboutOurTeam)Model.Content;
+		 var AboutOurTeamImage = content.Value<MediaWithCrops>("aboutOurTeamImage");
+         var isActive = ViewData["active"] as bool? ?? false;
+         var accordionClass = isActive ? "team-item-2 active" : "team-item-2";
+
+}
+
+<div class="@accordionClass">
+     <div class="team-thmb-2">
+         <a href="#">
+             <img src="@AboutOurTeamImage.MediaUrl()" alt="@AboutOurTeamImage.Name">
+         </a>
+     </div>
+     <div class="team-info-2">
+         <h3><a href="javascript:void(0);">@content.Value("aboutOurTeamName")</a></h3>
+         <span>@content.Value("aboutOurTeamPostion")</span>
+     </div>
+ </div>
+
+                       

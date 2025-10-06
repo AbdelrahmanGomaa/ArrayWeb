@@ -1,0 +1,16 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models
+
+@{
+    var content = (ContentModels.AboutOurClient)Model.Content;
+         var ContactsOurClientImg = content.Value<MediaWithCrops>("aboutOurClientImage");
+
+    
+}
+
+
+ <div class="brand-item">
+    <img src="@ContactsOurClientImg?.MediaUrl()" alt="@ContactsOurClientImg?.Name">
+</div>

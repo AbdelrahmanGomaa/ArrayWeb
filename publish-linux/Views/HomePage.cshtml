@@ -1,0 +1,802 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+    var CoursesPage = Umbraco.Content(Guid.Parse("d1dc16e7-5b5f-4e0c-964f-c774d0d5b7ec"));
+    var AboutPage = Umbraco.Content(Guid.Parse("757a3da7-bf22-4b99-bd7e-2973551f7999"));
+    var ProjectstPage = Umbraco.Content(Guid.Parse("478df49b-100a-4f39-8538-a1b111b81604"));
+    var aboutPage = Umbraco.ContentAtRoot()
+              .DescendantsOrSelfOfType("about") // غيّري alias لو مختلف
+              .FirstOrDefault();
+    var coursesPage = Umbraco.ContentAtRoot()
+    .DescendantsOrSelfOfType("courses") // غيّري alias لو مختلف
+    .FirstOrDefault();
+
+}
+
+<main>
+
+    <!-- hero area start  -->
+    <section class="hero-area section-spacing p-relative fix">
+        <div class="adjust-header-space"></div>
+        <div class="hero-area__bg">
+            <img src="assets/img/bg/hero-bg-1.jpg" alt="image not found">
+        </div>
+        <div class="hero__shapes d-none d-md-block">
+            <img class="hero__shape-1" src="~/assets/img/shapes/star-1.png" alt="image not found">
+            <img class="hero__shape-2" src="~/assets/img/shapes/star-2.png" alt="image not found">
+        </div>
+        <div class="meta-item meta-item-call d-none d-sm-flex">
+            <div class="meta-item__icon">
+                <img src="~/assets/img/icons/dial-pad.png" alt="image not found">
+            </div>
+            <div class="meta-item__text">
+                <p><a href="tel:+910369201003">+91 0369 201 003</a></p>
+            </div>
+        </div>
+        <div class="scroll-btn d-none d-sm-flex">
+            <a href="#"><span>SCROLL</span></a>
+        </div>
+        <div class="container">
+            <div class="hero-inner p-relative">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8">
+                        <div class="hero__content">
+                            <h1 class="hero__title animation__char_come">
+                                @Model.Value("headerTitle1")
+                                <span class="tpl__theme-color">
+                                    @Model.Value("headerTitle2")
+                                </span>
+                                <span>
+                                    @Model.Value("headerTitle3")
+                                </span>
+                                @Model.Value("headerTitle4")
+
+
+                            </h1>
+                            <p class="hero__text large title-anim">
+                                @Model.Value("headerDesc")
+                            </p>
+                            <div class="hero__btn">
+                                <a href="about.html" class="circle-btn">
+                                    <span class="icon-box"><i class="flaticon-next"></i></span>
+                                    <img src="~/assets/img/icons/about-btn-text.png" alt="image not found"
+                                         class="image-text">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- hero area end  -->
+    <!-- brand area start  -->
+    <section class="brand-area section-spacing" id="brand-area">
+        <div class="cross-1px">
+        </div>
+        <div class="container">
+            <div class="brand__inner">
+                <div class="row section-title-spacing">
+                    <div class="col-lg-12">
+                        <h2 class="brand-area__title p-text">
+                            Trusted by industry-leading organizations including
+                        </h2>
+                    </div>
+                </div>
+                @Html.GetBlockListHtml(AboutPage, "aboutOurClients", "AboutOurClient")
+
+            </div>
+        </div>
+    </section>
+    <!-- brand area end  -->
+    <!-- counter area start  -->
+    <div class="counter-area p-relative">
+        <div class="container">
+            <div class="counter__inner p-relative">
+                <div class="counter-area__bg">
+                    <img src="assets/img/bg/counter-bg.jpg" alt="image not found">
+                </div>
+                <div class="counter-wrapper">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="counter-item">
+                                <h4 class="counter__number">
+                                    <span><span class="odometer" data-count="@ProjectstPage.Value("projectsBannerNo1")">0</span>+</span>
+                                </h4>
+                                <div class="counter__text">
+                                    <p>@ProjectstPage.Value("ProjectsBannerName1")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="counter-item">
+                                <h4 class="counter__number">
+                                    <span><span class="odometer" data-count="@ProjectstPage.Value("projectsBannerNo2")">0</span>+</span>
+                                </h4>
+                                <div class="counter__text">
+                                    <p>@ProjectstPage.Value("ProjectsBannerName2")</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="counter-area__btn">
+                                <a href="@ProjectstPage.Value("projectsBannerVideoLink")" class="circle-btn popup-video">
+                                    <span class="icon-box">
+                                        <svg width="24" height="26" viewBox="0 0 24 26" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.1646 13L0.66455 25.9904L0.664551 0.00961778L23.1646 13Z"
+                                                  fill="white"></path>
+                                        </svg>
+                                    </span>
+                                    <img src="assets/img/icons/fact-btn-text.png" alt="image not found"
+                                         class="image-text">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="counter-item">
+                                <h4 class="counter__number">
+                                    <span><span class="odometer" data-count="@ProjectstPage.Value("projectsBannerNo3")">0</span>+</span>
+                                </h4>
+                                <div class="counter__text">
+                                    <p>@ProjectstPage.Value("ProjectsBannerName3")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- counter area end  -->
+    <!-- about area start  -->
+    <div class="about-area section-spacing p-relative">
+        <div class="about__shapes">
+            <img class="about-area__shape-1" src="assets/img/shapes/star-1.png" alt="image not found">
+        </div>
+        <div class="container">
+            <div class="row section-title-spacing">
+                <div class="col-xl-12">
+                    <div class="section__title-wrapper section__title-wrapper-about">
+                        <div class="section__subtitle tpl__item-center">
+                            <div class="section__subtitle-icon">
+                                <img src="assets/img/shapes/section-title-star.png" alt="image not found">
+                            </div>
+                            <p class="section__subtitle-text">
+                                @Model.Value("homeAboutTitle")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about__content">
+                <p class="p-text xlarge">
+                    @Model.Value("homeAboutDesc")
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- about area end  -->
+    <!-- award scroll area start  -->
+    <section class="award__scroll-area  mb-30 fix">
+        <div class="swiper text__scroll">
+            <div class="swiper-wrapper award-scroll-wrapper">
+                @{
+                    if (Model.Value<string[]>("homeAboutLeftBanner").Length > 0)
+                    {
+                        @foreach (var item in Model.Value<string[]>("homeAboutLeftBanner"))
+                        {
+                            <div class="swiper-slide">
+                                <div class="award-scroll-line">
+                                    <h2 class="award-scroll-line__heading xlarge uppercase">
+                                        @item
+                                    </h2>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+                }
+
+                
+            </div>
+        </div>
+    </section>
+    <!-- award scroll area end  -->
+    <!-- award scroll area start  -->
+    <section class="award__scroll-area fix">
+        <div dir="rtl" class="swiper text__scroll">
+            <div class="swiper-wrapper award-scroll-wrapper">
+
+                @{
+                    if (Model.Value<string[]>("homeAboutRightBanner").Length > 0)
+                    {
+                        @foreach (var item in Model.Value<string[]>("homeAboutRightBanner"))
+                        {
+                            <div class="swiper-slide">
+                                <div class="award-scroll-line-2">
+                                    <h2 class="award-scroll-line__heading xlarge uppercase">
+                                        @item
+                                    </h2>
+                                </div>
+                            </div>
+
+                        }
+
+                    }
+                }
+                <div class="swiper-slide">
+                    <div class="award-scroll-line-2">
+                        <h2 class="award-scroll-line__heading xlarge uppercase">
+                            NUMBER #1 DIGITAL AGENCY IN
+                            TOWN
+                        </h2>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- award scroll area end  -->
+    <!-- contact area start  -->
+    <div class="contact-area pt-55 section-spacing-bottom p-relative">
+        <div class="contact__shapes">
+            <img class="contact-area__shape-1" src="assets/img/shapes/star-1.png" alt="image not found">
+            <img class="contact-area__shape-2" src="assets/img/shapes/spiral.png" alt="image not found">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__btn tpl__item-center">
+                        <a href="contact.html" class="circle-btn is-green">
+                            <span class="icon-box"><i class="flaticon-next"></i></span>
+                            <img src="assets/img/icons/contact-btn-text.png" alt="image not found"
+                                 class="image-text">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact area end  -->
+    <!-- services area start  -->
+    <section class="services-area section-spacing p-relative fix">
+        <div class="services-area__bg">
+            <img src="assets/img/bg/cube-dot-bg.jpg" alt="image not found">
+        </div>
+        <div class="container">
+            <div class="row align-items-end g-5 section-title-spacing">
+                <div class="col-lg-8">
+                    <div class="section__title-wrapper section__title-wrapper-services ">
+                        <div class="section__subtitle">
+                            <div class="section__subtitle-icon">
+                                <img src="assets/img/shapes/section-title-star.png" alt="image not found">
+                            </div>
+                            <p class="section__subtitle-text">
+                                @Model.Value("homeCoursesTitle")
+                            </p>
+                        </div>
+                        <h2 class="section__title-main xlarge uppercase title-anim">@Model.Value("homeCoursesSubTitle")</h2>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="services__btn d-flex justify-content-lg-end mb-20">
+                        <a href="@CoursesPage.Url()" class="border-bottom-btn">View All Services</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="services-wrapper">
+            <div class="container">
+                <div class="swiper-container service-slider">
+                    <div class="swiper-wrapper">
+
+                        @{
+                            var selectionCourse = Umbraco.Content(Guid.Parse("d1dc16e7-5b5f-4e0c-964f-c774d0d5b7ec"))
+                            .ChildrenOfType("coursesDetails")
+                            .Where(x => x.IsVisible())
+                            .OrderBy(x => x.Name);
+                        }
+                        
+                            @foreach (var item in selectionCourse)
+                            {
+                                
+
+                                 <div class="swiper-slide">
+                                    <div class="service__box">
+                                        <h4 class="service__title">
+                                            <a href="@item.Url()">
+                                                <i class="flaticon-next"></i>@item.Name()
+                                            </a>
+                                        </h4>
+                                        <div class="service__content-wrapper">
+                                            <div class="service__content">
+                                                <div class="">
+                                                    <h4 class="service__title">
+                                                        @item.Name()
+                                                    </h4>
+                                                    <div class="service__list">
+                                                        
+                                                        @{
+                                                            if (item.Value<string[]>("coursePointsOut").Length > 0)
+                                                            {
+                                                                <ul>
+                                                                    @foreach (var itemPoint in item.Value<string[]>("coursePointsOut"))
+                                                                    {
+                                                                    <li>@itemPoint</li>
+                                                                    }
+                                                                </ul>
+                                                            }
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                                <div class="service__btn">
+                                                    <a href="@item.Url()">
+                                                        <i class="flaticon-next"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services area end  -->
+  <!-- portfolio area start  -->
+                <section class="portfolio__area">
+                    <div class="portfolio__wrapper">
+                        <div class="portfolio__title-wrap wf_panel">
+                            <div class="container">
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-xl-12 col-lg-12">
+                                        <div class="protfolio-title-area section-spacing">
+                                        <h2 class="protfolio-title title-anim">@Model.Value("homeProjectTitle")</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ol class="portfolio__items">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <!-- total count li defend on portfolio__slide-area there is 3/3 -->
+                        </ol>
+
+
+
+                        @{
+                            var selectionProjects = Umbraco.Content(Guid.Parse("478df49b-100a-4f39-8538-a1b111b81604"))
+                            .ChildrenOfType("projectDetalis")
+                            .Where(x => x.IsVisible())
+                            .Take(2);
+                        }
+
+                            @foreach (var item in selectionProjects)
+                            {
+                                    var ProjectImage = item.Value<MediaWithCrops>("projectImage");
+
+                                    <div class="portfolio__slide-area-1 wf_panel">
+                                        <div class="portfolio-slide-1 p-relative">
+                                            <div class="portfolio-slide-1-shapes">
+                                                <img class="portfolio-slide-1-shape-1" src="assets/img/shapes/star-bordered-1.png"
+                                                    alt="image not found">
+                                            </div>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-xl-5 col-lg-5">
+                                                        <div class="portfolio-slide-1-thumb">
+                                                        <img src="@ProjectImage?.MediaUrl()" alt="@ProjectImage?.Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-7 col-lg-7">
+                                                        <div class="portfolio-slide-1-content section-spacing">
+                                                            <div class="portfolio__num-count"></div>
+                                                            <h2 class="xlarge uppercase">@item.Value("projectName")</h2>
+                                                            <p>@item.Value("projectSummary")</p>
+                                                            <div class="area-btn btn_wrapper">
+                                                                <a class="c-button btn-moving" href="@item.Url()">
+                                                                    <span class="c-button__border"></span>
+                                                                    <span class="c-button__text">Show more</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                
+                            }
+                        
+
+
+
+
+                        <div class="portfolio-slide-3 p-relative wf_panel">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xl-7 col-lg-7">
+                                        <div class="portfolio-slide-3-content section-spacing">
+                                            <div class="portfolio__num-count"></div>
+                                            <h2 class="xlarge uppercase">@Model.Value("homeProjectCardTitle")</h2>
+                                            <p>@Model.Value("homeProjectCardSubTitle").</p>
+                                            <div class="area-btn btn_wrapper">
+                                            <a class="c-button btn-moving" href="@ProjectstPage.Url()">
+                                                    <span class="c-button__border"></span>
+                                                    <span class="c-button__text">Explor More</span>
+                                                </a>
+                                    @* <span>Or</span>
+                                                 <span class="call-number">Call us - <a href="tel:+0169850023601">+01
+                                                        6985 002 3601</a></span> *@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-5 col-lg-5">
+                                        <div class="portfolio-slide-3-thumb">
+                                            <img src="assets/img/gallery/gallery-1.html" alt="image not found">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </section>
+                <!-- portfolio area end  -->
+    <!-- team area start  -->
+    <section class="team-area section-spacing p-relative">
+        <div class="team-area__overlay" data-background="assets/img/bg/box-gradient-bg.jpg"></div>
+        <div class="container">
+            <div class="row align-items-end g-5 section-title-spacing">
+                <div class="col-lg-6">
+                    <div class="section__title-wrapper">
+                        <div class="section__subtitle">
+                            <div class="section__subtitle-icon">
+                                <img src="assets/img/shapes/section-title-star.png" alt="image not found">
+                            </div>
+                            <p class="section__subtitle-text">
+                                @Model.Value("homeTeamTitle")
+                            </p>
+                        </div>
+                        <h2 class="section__title-main xlarge uppercase title-anim">
+                            @Model.Value("homeTeamSubTitle")
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="team__meta-description mb-10">
+                        <p class="xlarge">
+                            @Model.Value("homeTeamDesc")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+            @{
+              
+
+                if (aboutPage is About aboutContent)
+                {
+                    var OurTeams = aboutContent.AboutOurTeams;
+
+                    if (OurTeams != null && OurTeams.Any())
+                    {
+                        @Html.GetBlockListHtml(AboutPage, "aboutOurTeams", "HomeOurTeam")
+
+                    }
+                }
+            }
+
+
+@*
+            <div class="team__wrapper anim-skewinup">
+
+                <div class="team__member">
+                    <span class="member-designation">App Designer</span>
+                    <a href="team-details.html">
+                        <div class="member-name">
+                            <span class="first-name">Adaam</span>
+                            <div class="member-image">
+                                <img src="assets/img/team/team-1.jpg"
+                                     alt="image not found">
+                            </div>
+                            <span class="last-name">Smith</span>
+                        </div>
+                    </a>
+                    <div class="member-details-btn btn_wrapper">
+                        <a class="c-button btn-moving" href="team-details.html">
+                            <span class="c-button__border"></span>
+                            <span class="c-button__text">Details</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="team__member">
+                    <span class="member-designation">UI/UX Designer</span>
+                    <a href="team-details.html">
+                        <div class="member-name">
+                            <span class="first-name">Henry</span>
+                            <div class="member-image">
+                                <img src="assets/img/team/team-2.jpg" alt="image not found">
+                            </div>
+                            <span class="last-name">Jhonson</span>
+                        </div>
+                    </a>
+                    <div class="member-details-btn btn_wrapper">
+                        <a class="c-button btn-moving" href="team-details.html">
+                            <span class="c-button__border"></span>
+                            <span class="c-button__text">Details</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="team__member">
+                    <span class="member-designation">Web Developer</span>
+                    <a href="team-details.html">
+                        <div class="member-name">
+                            <span class="first-name">Carolina</span>
+                            <div class="member-image">
+                                <img src="assets/img/team/team-3.jpg" alt="image not found">
+                            </div>
+                            <span class="last-name">Cab</span>
+                        </div>
+                    </a>
+                    <div class="member-details-btn btn_wrapper">
+                        <a class="c-button btn-moving" href="team-details.html">
+                            <span class="c-button__border"></span>
+                            <span class="c-button__text">Details</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="team__member">
+                    <span class="member-designation">Digital Marketer</span>
+                    <a href="team-details.html">
+                        <div class="member-name">
+                            <span class="first-name">Sophie</span>
+                            <div class="member-image">
+                                <img src="assets/img/team/team-4.jpg" alt="image not found">
+                            </div>
+                            <span class="last-name">Ferrer</span>
+                        </div>
+                    </a>
+                    <div class="member-details-btn btn_wrapper">
+                        <a class="c-button btn-moving" href="team-details.html">
+                            <span class="c-button__border"></span>
+                            <span class="c-button__text">Details</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>*@
+
+        </div>
+    </section>
+    <!-- team area end  -->
+    <!-- work process area start  -->
+    <section class="work-process-area primary-bg section-spacing">
+        <div class="container">
+            <div class="row section-title-spacing">
+                <div class="col-lg-12">
+                    <div class="section__title-wrapper section__title-wrapper-work-process">
+                        <div class="section__subtitle tpl__item-center">
+                            <div class="section__subtitle-icon">
+                                <img src="assets/img/shapes/section-title-star.png" alt="image not found">
+                            </div>
+                            <p class="section__subtitle-text">
+                                @Model.Value("homeProcessTitle")
+                            </p>
+                        </div>
+                        <h2 class="section__title-main xlarge uppercase tpl__item-center title-anim">
+                            @Model.Value("homeProcessSubTitle")
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="work-process-inner">
+                @{
+
+
+                    if (coursesPage is Courses coursesContentStep)
+                    {
+                        var testimonials = coursesContentStep.CoursesSteps;
+
+                        if (testimonials != null && testimonials.Any())
+                        {
+                            @Html.GetBlockListHtml(coursesContentStep, "coursesSteps", "HomeStep")
+
+                        }
+                    }
+                }
+      
+              
+            </div>
+        </div>
+    </section>
+    <!-- work process area end  -->
+    <!-- testimonial area start  -->
+    <!-- page titler area start -->
+    <section class="page-title-area section-spacing-top adjust-header-space mb-55">
+        <div class="container">
+            <div class="page-title-wrappper">
+                <div class="breadcrumb-menu mb-20">
+                    <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                        <ul class="trail-items">
+                            <li class="trail-item trail-begin">
+                                <span><a href="index-2.html">Home</a></span>
+                            </li>
+                            <li class="trail-item"><span>Axil testimonials</span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <h2 class="page-title">Have a look to our Clients Feebacks</h2>
+            </div>
+        </div>
+    </section>
+    <!-- page titler area end -->
+
+    <section class="element-area">
+       
+        <!-- tetimonial area end  -->
+        <div class="testimonial-area primary-bg section-spacing mb-150 p-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="testimonia-area p-relative nav-on-hover">
+                            <!-- If we need navigation buttons -->
+                            <div class="brand-2-navigation slider-nav-wrapper">
+                                <button class="brand-2-button-prev slider-nav slider-nav-prev">
+                                    <i class="fa-regular fa-arrow-left-long"></i>
+                                </button>
+                                <button class="brand-2-button-next slider-nav slider-nav-next">
+                                    <i class="fa-regular fa-arrow-right-long"></i>
+                                </button>
+                            </div>
+                            <div class="swiper-container brand-active-2">
+                                @{
+                                  
+
+                                    if (aboutPage is About aboutContentTest)
+                                    {
+                                        var testimonials = aboutContentTest.AboutTestimonials;
+
+                                        if (testimonials != null && testimonials.Any())
+                                        {
+                                            @Html.GetBlockListHtml(aboutContentTest, "aboutTestimonials", "HomeTestimonial")
+
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- testimonial area end  -->
+    <!-- blog area start  -->
+    <section class="blogpost-area section-spacing p-relative fix">
+        <div class="blogpost-area__overlay area-absolute"></div>
+        <div class="noise-wrapper">
+            <div class="noise"></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__title-wrapper">
+                        <div class="section__subtitle tpl__item-center">
+                            <div class="section__subtitle-icon">
+                                <img src="assets/img/shapes/section-title-star.png" alt="image not found">
+                            </div>
+                            <p class="section__subtitle-text">
+                                @Model.Value("homeBlogTitle")
+                            </p>
+                        </div>
+                        <h2 class="section__title-main xlarge uppercase tpl__item-center title-anim">
+                            @Model.Value("homeBolgSubTitle")
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-12">
+                    <div class="blog__list">
+
+
+
+                        @{
+                            var selection = Umbraco.Content(Guid.Parse("6225fd59-0f21-401f-9f0a-a2a6901bee8e"))
+                            .ChildrenOfType("article")
+                            .Where(x => x.IsVisible())
+                            .OrderBy(x => x.UpdateDate)
+                            .Take(3);
+                        }
+                       
+                            @foreach (var item in selection)
+                            {
+                                var BlogImage = item.Value<MediaWithCrops>("heroImage");
+                                var blogDate = item.Value<DateTime>("date");
+                              
+                                 <div class="blog__item-1">
+                            <div class="">
+                                <a href="@item.Url()" class="tag">@item.Value("articleCategory")</a>
+                                <h3 class="blog__item-1-title title-block-2">
+                                    <a href="@item.Url()">
+                                        @item.Value("title")
+                                    </a>
+                                </h3>
+                                <div class="blog__meta-list">
+                                    <div class="meta-item">
+                                        <p>@blogDate.ToString("dd-MMM-yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog__button btn_wrapper d-flex align-items-center justify-content-end">
+                                <a class="c-button btn-moving" href="@item.Url()">
+                                    <span class="c-button__border"></span>
+                                    <span class="c-button__text"><i class="flaticon-right-arrow"></i></span>
+                                </a>
+                            </div>
+                            <div class="blog-thumb-hover d-none d-md-block"
+                                 data-background="@BlogImage?.MediaUrl()"></div>
+                        </div>
+
+
+
+                            }
+
+
+
+                        <div class="blog-img-wrap">
+                            <div class="blog-img"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog area end  -->
+    <!-- link scroll area start  -->
+    <section class="link-scroll-area p-relative fix pt-55 pb-55 bg-theme-2">
+        <div class="link-scroll-area-shape">
+        </div>
+        <div class="swiper text__scroll">
+            <div class="swiper-wrapper link-scroll-wrapper">
+                <div class="swiper-slide">
+                    <div class="link-scroll-line">
+                        <h2 class="link-scroll-line__heading xlarge uppercase">
+                            <a href="contact.html">GET IN <span class="stroke-text">TOUCH</span></a>
+                            <a href="contact.html">GET IN <span class="stroke-text">TOUCH</span></a>
+                        </h2>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="link-scroll-line">
+                        <h2 class="link-scroll-line__heading xlarge uppercase">
+                            <a href="contact.html">GET IN <span class="stroke-text">TOUCH</span></a>
+                            <a href="contact.html">GET IN <span class="stroke-text">TOUCH</span></a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- link scroll area end  -->
+</main>

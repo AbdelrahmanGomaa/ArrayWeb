@@ -1,0 +1,253 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+    var AboutHeaderImage = Model.Value<MediaWithCrops>("aboutHeaderImage");
+    var AboutHeaderImage2 = Model.Value<MediaWithCrops>("aboutHeaderImage2");
+    var AboutFAQsImage = Model.Value<MediaWithCrops>("aboutFAQsImage");
+    var ContactPage = Umbraco.Content(Guid.Parse("456cf9a9-1fe2-42fd-9498-c48ad2ad4215"));
+    var AboutHistoryImage1 = Model.Value<MediaWithCrops>("aboutHistoryImage1");
+    var AboutHistoryImage2 = Model.Value<MediaWithCrops>("aboutHistoryImage2");
+    var AboutHistoryImage3 = Model.Value<MediaWithCrops>("aboutHistoryImage3");
+
+
+
+}
+
+<main>
+
+    <!-- page titler area start -->
+    <section class="page-title-area section-spacing-top pb-55 adjust-header-space">
+        <div class="container">
+            <div class="page-title-wrappper">
+                <div class="breadcrumb-menu mb-20">
+                    <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                        <ul class="trail-items">
+                            <li class="trail-item trail-begin"><span>@Model.Name</span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <h1 class="page-title animation__word_come">
+                    @Model.Value("aboutHeaderTitle")
+                </h1>
+            </div>
+        </div>
+    </section>
+    <!-- page titler area end -->
+    <!-- about us area start  -->
+    <div class="about-area-1 section-spacing-bottom p-relative">
+        <div class="container">
+            <div class="about-us-main p-relative">
+                <div class="about-us-thumb-2">
+                    <img src="@AboutHeaderImage2?.MediaUrl()" alt="@AboutHeaderImage2?.Name">
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="about-us-thumb-1 mb-60">
+                            <img src="@AboutHeaderImage?.MediaUrl()" alt="@AboutHeaderImage?.Name">
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 col-lg-6">
+                        <div class="about-us-content">
+                            <div class="about-us-text">
+                                <span class="line__subtitle mb-50">
+                                    @Model.Value("aboutHeaderSubTitle")
+                                </span>
+                                <p>
+                                    @Model.Value("aboutHeaderDesc")
+                                </p>
+                            </div>
+                            <div class="btn_wrapper">
+                                <a class="c-button btn-moving" href="@ContactPage.Url()">
+                                    <span class="c-button__border"></span>
+                                    <span class="c-button__text">Contact Us</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about us area end  -->
+    <!-- team area start -->
+    <section class="team-area primary-bg section-spacing-top">
+        <div class="container">
+            <div class="section__title-wrapper is-white tpl__item-center mb-60">
+                <h2 class="section__title-inner title-anim">@Model.Value("aboutOurTeamTitle")</h2>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+
+                    @Html.GetBlockListHtml(Model, "aboutOurTeams", "AboutOurTeam")
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- team area end-->
+    <!-- history area start -->
+    <section class="history-area fix p-relative section-spacing">
+        <div class="history-thumbs">
+            <div class="history-thumb-1">
+                <img src="@AboutHistoryImage1?.MediaUrl()" alt="@AboutHistoryImage1?.Name">
+            </div>
+            <div class="history-thumb-2">
+                <img src="@AboutHistoryImage2?.MediaUrl()" alt="@AboutHistoryImage2?.Name">
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="section__title-wrapper tpl__item-center section__title-wrapper-history">
+                        <span class="section__inner-subtitle">@Model.Value("aboutHistoryTitle")</span>
+                        <h2 class="section__title-inner title-anim">@Model.Value("aboutHistorySubTitle")</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xxl-6 col-xl-6 col-lg-8">
+                    <div class="history-content p-relative z-index-1 text-center">
+                        <h5>@Model.Value("aboutHistoryText")</h5>
+                        <h2>@Model.Value("aboutHistoryYear")</h2>
+                        <p>
+                            @Model.Value("aboutHistoryDesc")
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="history-thumb-3">
+                        <img src="@AboutHistoryImage3?.MediaUrl()" alt="@AboutHistoryImage3?.Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- history area end -->
+    <!-- why area start -->
+    <section class="why-area primary-bg section-spacing">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section__title-wrapper is-white mb-60">
+                        <span class="section__inner-subtitle">@Model.Value("aboutFAQsTitle")</span>
+                        <h2 class="section__title-inner title-anim">
+                            @Model.Value("aboutFAQsSubTitle")
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="why-wrapper">
+                        <div class="why-content">
+                            <div class="why-thumb" data-background="@AboutFAQsImage?.MediaUrl()">
+                            </div>
+                            <div class="area__btn">
+                                <a href="@Model.Value("aboutFAQsLink")" class="circle-btn popup-video">
+                                    <span class="icon-box"
+                                          data-background="@AboutFAQsImage?.MediaUrl()">
+                                        <svg width="24" height="26" viewBox="0 0 24 26" fill="none"
+                                             xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.1646 13L0.66455 25.9904L0.664551 0.00961778L23.1646 13Z"
+                                                  fill="white"></path>
+                                        </svg>
+                                    </span>
+                                    <img src="~/assets/img/icons/play-text-white.png" alt="play-text-white"
+                                         class="image-text">
+                                </a>
+                            </div>
+                            <span class="line"></span>
+                        </div>
+                        <p class="xlarge">
+                            @Model.Value("aboutFAQsDesc")
+                        </p>
+                        <div class="why-accordion tp-accordion-fix">
+                            <div class="accordion" id="accordionExample-st-2">
+
+                                @Html.GetBlockListHtml(Model, "aboutFaqs", "AboutFaq")
+
+                              
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- why area end -->
+    <!-- brand area start  -->
+    <section class="brand-area section-spacing">
+        <div class="container">
+            <h4 class="brand-title text-center p-text mb-75">
+                @Model.Value("aboutOurClientsTitle")
+            </h4>
+            <div class="brand__inner">
+
+                @Html.GetBlockListHtml(Model, "aboutOurClients", "AboutOurClient")
+
+            </div>
+        </div>
+    </section>
+    <!-- brand area end  -->
+    <!-- page titler area start -->
+    <section class="page-title-area section-spacing-top adjust-header-space mb-55">
+        <div class="container">
+            <div class="page-title-wrappper">
+                <div class="breadcrumb-menu mb-20">
+                    <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                        <ul class="trail-items">
+                            <li class="trail-item trail-begin">
+                                <span><a href="index-2.html">Home</a></span>
+                            </li>
+                            <li class="trail-item"><span>Axil testimonials</span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <h2 class="page-title">Have a look to our Clients Feebacks</h2>
+            </div>
+        </div>
+    </section>
+    <!-- page titler area end -->
+
+
+
+    <section class="element-area">
+        <!-- tetimonial area start  -->
+        <div class="testimonial-area primary-bg section-spacing mb-150 p-relative">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="testimonia-area p-relative nav-on-hover">
+                            <!-- If we need navigation buttons -->
+                            <div class="brand-2-navigation slider-nav-wrapper">
+                                <button class="brand-2-button-prev slider-nav slider-nav-prev">
+                                    <i class="fa-regular fa-arrow-left-long"></i>
+                                </button>
+                                <button class="brand-2-button-next slider-nav slider-nav-next">
+                                    <i class="fa-regular fa-arrow-right-long"></i>
+                                </button>
+                            </div>
+                            <div class="swiper-container brand-active-2">
+                                @Html.GetBlockListHtml(Model, "aboutTestimonials", "AboutTestimonial")
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- tetimonial area end  -->
+    </section>
+
+</main>

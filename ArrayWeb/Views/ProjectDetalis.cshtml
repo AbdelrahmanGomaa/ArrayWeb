@@ -1,0 +1,139 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+    var HomePage = Model.Root();
+    var Parent = Model.Parent;
+    var ProjectImage = Model.Value<MediaWithCrops>("projectImage");
+
+
+}
+<!-- Add your site or application content here -->
+<main>
+
+    <!-- page title area start -->
+    <section class="page-title-area section-spacing-top pb-200 primary-bg p-relative adjust-header-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-9">
+                    <div class="page-title-wrappper is-white">
+                        <div class="breadcrumb-menu mb-20">
+                            <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                                <ul class="trail-items">
+                                    <li class="trail-item trail-begin"><span>@HomePage.Name</span></li>
+                                    <li class="trail-item"><span>@Parent.Name</span></li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <h2 class="page-title mb-35 animation__word_come_long">@Model.Value("projectName")</h2>
+                        <p class="page-title-paragraph xlarge p-text">
+                            @Model.Value("projectSummary")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- page title area end -->
+    <!-- case deetails area start -->
+    <section class="case-details-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="case-meta-wrapper">
+                        <div class="case-meta-item">
+                            <P><strong>Client : </strong>@Model.Value("projectDevName")</P>
+                        </div>
+                        <div class="case-meta-item">
+                            <P><strong>Service : </strong>@Model.Value("projectType")</P>
+                        </div>
+                        <div class="case-meta-item">
+                            <P><strong>Industry : </strong>@Model.Value("projectDescTitle")</P>
+                        </div>
+                        
+                    </div>
+                    <div class="case-details-thumb">
+                        <img src="@ProjectImage?.MediaUrl()" alt="@ProjectImage?.Name">
+                    </div>
+                    <h4 class="case-subtitle mb-25">
+                        <span>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M3.23197 8L0 9.90086L2.38215 14.0991L5.616 12.2016L5.61782 16H10.3822L10.384 12.2016L13.6178 14.0991L16 9.90086L12.768 8L16 6.09914L13.6178 1.90086L10.384 3.79843L10.3822 0H5.61782L5.616 3.79843L2.38215 1.90086L0 6.09914L3.23197 8Z"
+                                      fill="#14CF93" />
+                            </svg>
+                        </span>Objective
+                    </h4>
+                    <p class="mb-55">
+                        @Model.Value("projectDesc")
+                    </p>
+                
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+
+
+                  
+                    <!-- Design area start -->
+                    <section class="design-area">
+                        <h4 class="case-subtitle">
+                            <span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                          d="M3.23197 8L0 9.90086L2.38215 14.0991L5.616 12.2016L5.61782 16H10.3822L10.384 12.2016L13.6178 14.0991L16 9.90086L12.768 8L16 6.09914L13.6178 1.90086L10.384 3.79843L10.3822 0H5.61782L5.616 3.79843L2.38215 1.90086L0 6.09914L3.23197 8Z"
+                                          fill="#14CF93"></path>
+                                </svg>
+                            </span>Visual design
+                        </h4>
+                        <div class="design-humb-grid">
+
+
+                            @{
+                                var typedMultiMediaPicker = Model.Value<IEnumerable<MediaWithCrops>>("projectMedia");
+                                foreach (var entry in typedMultiMediaPicker)
+                                {
+                                    <div class="design-thumb">
+                                        <img src="@entry?.MediaUrl()" alt="@entry?.Name">
+                                        <img src="@entry?.MediaUrl()" alt="@entry?.Name">
+                                    </div>
+                                }
+                            }
+                         
+
+
+                        </div>
+                    </section>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- case deetails area end -->
+
+    <!-- title intro area -->
+    <section class="title-intro-area">
+        <div class="container">
+            <div class="title-intro-wrapper is-center section-spacing">
+                <div class="intro__title-wrapper">
+                    <h2 class="intro__title-inner folks-text">Let’s talk.</h2>
+                </div>
+                <div class="intro-brn">
+                    <a href="contact.html" class="circle-btn is-green">
+                        <span class="icon-box"><i class="flaticon-next"></i></span>
+                        <img src="assets/img/icons/contact-btn-text.png" alt="image not found"
+                             class="image-text">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- title intro end -->
+
+</main>

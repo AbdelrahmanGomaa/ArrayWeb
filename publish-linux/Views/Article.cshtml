@@ -1,0 +1,159 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+    var HomePage = Model.Root();
+    var GrandParent = Model.Parent?.Parent;
+    var BlogImage = Model.Value<MediaWithCrops>("heroImage");
+    var blogDate = Model.Value<DateTime>("date");
+}
+
+
+<!-- Add your site or application content here -->
+<main>
+
+    <!-- page titler area start -->
+    <section class="page-title-area section-spacing-top adjust-header-space mb-40">
+        <div class="container">
+            <div class="page-title-wrappper">
+                <div class="breadcrumb-menu mb-20">
+                    <nav aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs">
+                        <ul class="trail-items">
+                            <li class="trail-item trail-begin"><span>@HomePage.Name</span></li>
+                            <li class="trail-item"><span>@GrandParent.Name</span></li>
+                        </ul>
+                    </nav>
+                </div>
+                <h2 class="page-title animation__word_come">
+                    @Model.Value("title")
+                </h2>
+            </div>
+        </div>
+    </section>
+    <!-- page titler area end -->
+    <!-- postbox area start -->
+    <section class="postbox__area section-spacing-bottom">
+        <div class="container">
+            <div class="row gy-50">
+                <div class="col-xxl-8 col-xl-7 col-lg-7">
+                    <div class="postbox__wrapper">
+                        <div class="postbox__item mb-60">
+                            <div class="postbox__meta mb-20">
+                                <span>
+                                    <a href="javascript:void(0);">@Model.Value("articleCategory")</a>
+                                </span>
+                                <span> @blogDate.ToString("dd-MMM-yyyy")</span>
+                            </div>
+                            <div class="postbox__thumb-2 mb-30">
+                                <a href="javascript:void(0);">
+                                    <img src="@BlogImage?.MediaUrl()" alt="@BlogImage?.Name">
+                                </a>
+                            </div>
+                            <p>
+                                @Model.Value("articleBody")
+                            </p>
+                        </div>
+                      @*   <div class="postbox__item is-box mb-60">
+
+                            <div class="postbox__box-thumb mb-30">
+                                <img src="assets/img/gallery/gallery-11.jpg" alt="image not found">
+                                <img src="assets/img/gallery/gallery-26.jpg" alt="image not found">
+                            </div>
+
+                        </div> *@
+                        
+
+                       
+
+                        <div class="sidebar__tag mb-35 mt-70">
+                            @if (Model.HasValue("articleTags"))
+                            {
+                                var tags = Model.Value<IEnumerable<string>>("articleTags");
+                                    @foreach (var tag in tags)
+                                    {
+
+                                        <a href="javascript:void(0);">@tag</a>
+                                    }
+                                
+                            }
+                        </div>
+                        <div class="postbox__share-wrapper mb-60">
+                           
+                            <div class="postbox__social">
+                                <a href="https://www.facebook.com/" target="_blank">
+                                    <i class="fa-brands fa-facebook"></i>
+                                </a>
+                                <a href="https://www.twitter.com/" target="_blank">
+                                    <i class="fa-brands fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/" target="_blank">
+                                    <i class="fa-brands fa-instagram"></i>
+                                </a>
+                                <a href="https://www.youtube.com/" target="_blank">
+                                    <i class="fa-brands fa-youtube"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-xl-5 col-lg-5">
+                    <div class="sidebar__wrapper">
+                        <div class="sidebar__widget mb-50">
+                            <h3 class="sidebar__widget-title mb-30">Top Stories</h3>
+                            <div class="sidebar__widget-content">
+                                <div class="sidebar__post">
+                                   
+                                   
+
+                                @{
+                                    var selection = Umbraco.Content(Guid.Parse("6225fd59-0f21-401f-9f0a-a2a6901bee8e"))
+                                    .ChildrenOfType("article")
+                                    .Where(x => x.IsVisible())
+                                    .OrderBy(x => x.CreateDate)
+                                    .Take(4);
+                                }
+                              
+                                    @foreach (var item in selection)
+                                    {
+                                      
+                                        var BlogImageRecent = item.Value<MediaWithCrops>("heroImage");
+                                        var blogDateRecent = item.Value<DateTime>("date");
+
+                                         <div class="rc__post">
+                                        <div class="rc__post-thumb">
+                                            <a href="@item.Url()">
+                                                <img src="@BlogImageRecent?.MediaUrl()"
+                                                     alt="@BlogImageRecent?.Name">
+                                            </a>
+                                        </div>
+                                        <div class="rc__post-content">
+                                            <h5 class="rc__post-title">
+                                                <a href="@item.Url()">
+                                                     @item.Value("title")
+                                                </a>
+                                            </h5>
+                                            <div class="postbox__meta">
+                                                <span>
+                                                    <a href="@item.Url()">@item.Value("articleCategory")</a>
+                                                </span>
+                                                <span>
+                                                    @blogDateRecent.ToString("MM-dd-yyyy")
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- postbox area end -->
+
+</main>

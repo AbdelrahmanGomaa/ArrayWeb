@@ -1,0 +1,189 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+
+
+@{
+
+    var selectionMenu = Model.Root().Children().Where(x => x.IsVisible());
+    var HomePage = Model.Root();
+    var ContactPage = Umbraco.Content(Guid.Parse("456cf9a9-1fe2-42fd-9498-c48ad2ad4215"));
+    var FooterLogo = HomePage.Value<MediaWithCrops>("footerLogo");
+}
+
+<!-- footer-area-start -->
+<footer>
+    <section class="footer-area footer__bg section-spacing">
+        <div class="container">
+            <div class="row gy-50">
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                    <div class="footer__widget footer__widget-1">
+                        <div class="footer__logo mb-20">
+                            <a href="index-2.html">
+                                <img src="@FooterLogo?.MediaUrl()"
+                                     alt="@FooterLogo?.Name">
+                            </a>
+                        </div>
+                        <p class="made-by-text mb-30">Made by <a href="https://www.digidooagency.com/" target="_blank">DIGIDOO</a></p>
+                     @*    <div class="product__review-thumb mb-40">
+                            <img src="assets/img/projects/product-review-1.png" alt="image not found">
+                            <img src="assets/img/projects/product-review-2.png" alt="image not found">
+                        </div> *@
+                        <div class="social-links">
+                            <ul>
+                                <li>
+                                    <a href="https://linkedin.com/" target="_blank">
+                                        <i class="fab fa-linkedin-in"></i>
+                                        <span class="icon-text">IN</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://twitter.com/" target="_blank">
+                                        <i class="fab fa-twitter"></i>
+                                        <span class="icon-text">TW</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://facebook.com/" target="_blank">
+                                        <i class="fab fa-facebook"></i>
+                                        <span class="icon-text">FB</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://tiktok.com/" target="_blank">
+                                        <i class="fab fa-tiktok"></i>
+                                        <span class="icon-text">TT</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__widget footer__widget-2">
+                        <h4 class="footer__widget-title mb-30">@HomePage.Value("footerTitle1")</h4>
+                        <div class="footer__links">
+                        @{
+                            var selectionCourses = Umbraco.Content(Guid.Parse("d1dc16e7-5b5f-4e0c-964f-c774d0d5b7ec"))
+                            .ChildrenOfType("coursesDetails")
+                            .Where(x => x.IsVisible())
+                            .OrderBy(x => x.Name)
+                            .Take(5);
+                        }
+                        <ul>
+                            @foreach (var item in selectionCourses)
+                            {
+                                <li>
+                                    <a href="@item.Url()">@item.Name()</a>
+                                </li>
+                            }
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+                    <div class="footer__widget footer__widget-3">
+                        <h4 class="footer__widget-title mb-30">@HomePage.Value("footerTitle2")</h4>
+                        <div class="footer__links">
+                            <ul>
+                            	@foreach (var item in selectionMenu)
+                                {
+
+                                    <li>
+                                        <a href="@item.Url()">
+                                            @(!(String.IsNullOrEmpty(item.Value<String>("menuDisplayName"))) ? item.Value("menuDisplayName") : item.Name)
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12">
+                    <div class="footer__widget footer__widget-4">
+                        <h4 class="footer__widget-title mb-30">@HomePage.Value("footerTitle3")</h4>
+                        <p class="mb-20">
+                            We’re always on the lookout for the cutting-edge tech and brand
+                            innovations. Join us
+                            today.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="company-address-area footer__bg">
+        <div class="container">
+            <div class="address-wrapper pt-60 pb-10">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="address-box mb-40">
+                            <h4 class="country-name mb-25">@HomePage.Value("footerInfo1")</h4>
+                            <div class="address-list">
+                                <ul>
+                                    <li>
+                                        <a href="https://maps.google.com/" target="_blank">
+                                            @HomePage.Value("footerAddress")
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="address-box mb-40">
+                            <h4 class="country-name mb-25">@HomePage.Value("footerInfo2")</h4>
+                            <div class="address-list">
+                                <ul>
+                                    <li>
+                                        <a href="tel:@HomePage.Value("footerNumber")">@HomePage.Value("footerNumber")</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="address-box mb-40">
+                            <h4 class="country-name mb-25">@HomePage.Value("footerInfo3")</h4>
+                            <div class="address-list">
+                                <ul>
+                                    <li>
+                                        <a href="mailto:@HomePage.Value("footerMail")" target="_blank">
+                                            @HomePage.Value("footerMail")
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="address-box mb-40">
+                            <h4 class="country-name mb-25">@HomePage.Value("footerInfo4")</h4>
+                            <div class="address-list">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">@HomePage.Value("footerHours")</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="copyright-area copyright__bg pb-30 p-relative z-index-1">
+        <div class="container">
+            <div class="footer-top pt-30"></div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="copyright__text tpl__item-center">
+                        <p>@HomePage.Value("footerCopy")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer-area-end -->
+

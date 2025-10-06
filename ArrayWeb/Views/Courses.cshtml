@@ -1,0 +1,126 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
+
+@{
+	Layout = "masterTemplate.cshtml";
+    var CoursesHeaderImage1 = Model.Value<MediaWithCrops>("coursesHeaderImage1");
+
+}
+
+
+
+            <!-- Add your site or application content here -->
+            <main>
+
+                <!-- service banner area start  -->
+                <div class="service-banner-area section-spacing fix p-relative adjust-header-space">
+                    <div class="service-banner-shapes">
+                        <img class="shape-1" src="~/assets/img/shapes/ragtangol.html" alt="image not found">
+                        <img class="shape-2" src="~/assets/img/shapes/circle-line.html" alt="image not found">
+                    </div>
+                    <div class="container">
+                        <div class="service-banner-main p-relative">
+                            <div class="row">
+                                <div class="col-xxl-9 col-xl-9">
+                                    <div class="service-banner-title-box animation__char_come">
+                                        <span class="service-banner-subtitle">@Model.Name</span>
+                                        <h2>
+                                        <span class="service-banner-title">@Model.Value("coursesHeaderTitle1")</span>
+                                          
+                                            <span class="thumb-layout">
+                                                <span class="thumb-2"></span>
+                                            <span class="service-banner-title">@Model.Value("coursesHeaderTitle2")</span>
+                                            </span>
+                                        <span class="service-banner-title">& @Model.Value("coursesHeaderTitle3")</span>
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-xxl-3 col-xl-3">
+                                    <div class="service-banner-award">
+                                    <img src="@CoursesHeaderImage1?.MediaUrl()" alt="@CoursesHeaderImage1?.Name">
+                                        <span class="award-bg"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- service banner area end  -->
+
+                <!-- service list area start -->
+                <div class="service-list-area section-spacing">
+                    <div class="container">
+                        <div class="service-list-wrapper">
+
+
+                            @{
+                                var selection = Umbraco.Content(Guid.Parse("d1dc16e7-5b5f-4e0c-964f-c774d0d5b7ec"))
+                                .ChildrenOfType("coursesDetails")
+                                .Where(x => x.IsVisible())
+                                .OrderBy(x => x.Name);
+                            }
+                            
+                                @foreach (var item in selection)
+                                {
+                                    
+
+
+                                    
+                                        <div class="service-list-item bdFadeUp">
+                                            <div class="service-list-title-inner">
+                                                <h3 class="service-list-title">@item.Name()</h3>
+                                            </div>
+                                            <div class="service-list-description">
+                                            <p>@item.Value("courseDesc")</p>
+                                            </div>
+                                            <div class="service-list-link">
+                                                <a href="@item.Url()" class="service-list-btn"><span>View
+                                                        Service Details</span><span class="btn-icon"><i
+                                                            class="flaticon-next"></i></span></a>
+                                            </div>
+                                        </div>
+
+                                }
+
+                        </div>
+                    </div>
+                </div>
+                <!-- service list area end -->
+
+                <!-- step area start -->
+                <section class="step-area is-grey-bg section-spacing">
+                    <div class="container">
+                        <div class="section__title-wrapper tpl__item-center mb-60">
+                        <h2 class="section__title-inner title-anim">@Model.Value("coursesStepsTitle")</h2>
+                        </div>
+                        <div class="step-main-wrapper">
+    
+                        @Html.GetBlockListHtml(Model, "coursesSteps", "CoursesStep")
+
+
+                        </div>
+                    </div>
+                </section>
+                <!-- step area end -->
+
+                <!-- title intro area -->
+                <section class="title-intro-area fix primary-bg">
+                    <div class="container">
+                        <div class="title-intro-wrapper section-spacing">
+                            <div class="intro__title-wrapper">
+                                <h2 class="intro__title-inner folks-text">Let’s talk.</h2>
+                            </div>
+                            <div class="intro-brn">
+                                <a href="contact.html" class="circle-btn is-green">
+                                    <span class="icon-box"><i class="flaticon-next"></i></span>
+                                    <img src="assets/img/icons/contact-btn-text.png" alt="image not found"
+                                        class="image-text">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- title intro end -->
+
+            </main>

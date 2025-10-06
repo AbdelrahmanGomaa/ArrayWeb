@@ -1,0 +1,23 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListModel>
+@{
+    if (Model?.Any() != true) { return; }
+        var index = 0;
+
+}
+	   
+			
+<div class="team-item-2-grid">
+    @foreach (var block in Model)
+    {
+        if (block?.ContentUdi == null) { continue; }
+        var data = block.Content;
+        var isActive = index == 1; // ✅ أول عنصر بس هو اللي بياخد is-active
+
+        @await Html.PartialAsync("blocklist/Components/" + data.ContentType.Alias, block, new ViewDataDictionary(ViewData) { { "active", isActive } })
+
+        index++;
+
+    }
+		
+</div>	
+		

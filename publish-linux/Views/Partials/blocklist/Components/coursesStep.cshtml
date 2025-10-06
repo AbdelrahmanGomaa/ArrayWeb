@@ -1,0 +1,21 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+         var content = (ContentModels.CoursesStep)Model.Content;
+
+    
+}
+
+        <div class="col-xxl-3 col-xl-3 col-lg-4 col-md-6">
+            <div class="step-item">
+                <div class="step-content">
+                    <div class="step-content-heading">
+                        <h4 class="step-title">@content.Value("coursesStepName")</h4>
+                        <div class="num__count"></div>
+                    </div>
+                    <p>@content.Value("coursesStepDesc")</p>
+                </div>
+            </div>
+        </div>
